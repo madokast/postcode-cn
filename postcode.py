@@ -20,10 +20,17 @@ def resolve(postcode):
             _Data_List.sort()
     area = _Data.get(str(postcode), ('', '', ''))
     if not any(area):
-        postcode = int(postcode) // 100 * 100
-        index = bisect.bisect_right(_Data_List, postcode)
-        if index < len(_Data_List):
+        postcode = int(postcode)
+        index = bisect.bisect_left(_Data_List, postcode)
+        if index == 0:
             area = _Data[str(_Data_List[index])]
+        else: # 找左侧的
+            if _Data_List[index] // 100 == _Data_List[index-1] // 100: # 必须同区
+                area = _Data[str(_Data_List[index-1])]
+            else:
+                area = _Data[str(_Data_List[index])]
+                area = (area[0], area[1], '')
+
         if postcode % 10000 == 0:
             area = (area[0], area[1], '')
         
@@ -33,6 +40,11 @@ def resolve(postcode):
 if __name__ == '__main__':
     print(resolve(100032)) # ('北京市', '', '西城区')
     print(resolve(100000)) # ('北京市', '', '')
+
+    print(resolve(518109)) # ('广东省', '深圳市', '龙华区')
+    print(resolve(518110)) # ('广东省', '深圳市', '龙华区')
+    print(resolve(518000)) # ('广东省', '深圳市', '罗湖区')
+    print(resolve(518001)) # ('广东省', '深圳市', '罗湖区')
 
 
     

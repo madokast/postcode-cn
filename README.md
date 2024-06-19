@@ -8,4 +8,9 @@
 import postcode
 print(postcode.resolve(100032)) # ('北京市', '', '西城区')
 print(postcode.resolve(100000)) # ('北京市', '', '')
+
+print(postcode.resolve(518109)) # ('广东省', '深圳市', '龙华区')
+print(postcode.resolve(518110)) # ('广东省', '深圳市', '龙华区')
+print(postcode.resolve(518000)) # ('广东省', '深圳市', '罗湖区')
+print(postcode.resolve(518001)) # ('广东省', '深圳市', '罗湖区')
 ```
