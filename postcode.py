@@ -4,7 +4,7 @@ import regex
 
 _Data = None
 _Data_List = None
-_Number = regex.compile(r'^\d6$')
+_Number = regex.compile(r'^\d{6}$')
 
 def resolve(postcode):
     postcode = str(postcode)
@@ -64,6 +64,11 @@ if __name__ == '__main__':
     print(resolve(1.13))
     print(resolve(518001.0))
     print(resolve(999020))
+
+    print(resolve(110121))
+    print(resolve(110122))
+    print(resolve(110131))
+    print(resolve(114300))
 
 
     
